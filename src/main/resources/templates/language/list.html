@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{language.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{language.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/languages/add}" class="btn btn-primary ms-2">[[#{language.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${languages.empty}">[[#{language.list.empty}]]</div>
+            <div th:if="${!languages.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{language.id.label}]]</th>
+                            <th scope="col">[[#{language.name.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="language : ${languages}">
+                            <td>[[${language.id}]]</td>
+                            <td>[[${language.name}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/languages/edit/{id}(id=${language.id})}" class="btn btn-sm btn-secondary">[[#{language.list.edit}]]</a>
+                                    <form th:action="@{/languages/delete/{id}(id=${language.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{language.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

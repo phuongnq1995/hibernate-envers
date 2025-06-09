@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{store.add.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{store.add.headline}]]</h1>
+                <div>
+                    <a th:href="@{/stores}" class="btn btn-secondary">[[#{store.add.back}]]</a>
+                </div>
+            </div>
+            <div th:replace="~{fragments/forms::globalErrors('store')}" />
+            <form th:action="${requestUri}" method="post" novalidate="">
+                <div th:replace="~{fragments/forms::inputRow(object='store', field='name')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='store', field='masterAddress', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='store', field='deliveryAddress', type='select')}" />
+                <div th:replace="~{fragments/forms::inputRow(object='store', field='languages', type='multiselect')}" />
+                <input type="submit" th:value="#{store.add.headline}" class="btn btn-primary mt-4" />
+            </form>
+        </div>
+    </body>
+</html>

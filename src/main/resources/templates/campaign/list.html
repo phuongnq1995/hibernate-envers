@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{campaign.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{campaign.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/campaigns/add}" class="btn btn-primary ms-2">[[#{campaign.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${campaigns.empty}">[[#{campaign.list.empty}]]</div>
+            <div th:if="${!campaigns.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{campaign.id.label}]]</th>
+                            <th scope="col">[[#{campaign.name.label}]]</th>
+                            <th scope="col">[[#{campaign.store.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="campaign : ${campaigns}">
+                            <td>[[${campaign.id}]]</td>
+                            <td>[[${campaign.name}]]</td>
+                            <td>[[${campaign.store}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/campaigns/edit/{id}(id=${campaign.id})}" class="btn btn-sm btn-secondary">[[#{campaign.list.edit}]]</a>
+                                    <form th:action="@{/campaigns/delete/{id}(id=${campaign.id})}"
+                                            th:data-confirm-message="#{delete.confirm}" method="post" class="js-submit-confirm d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{campaign.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

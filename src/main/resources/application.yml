@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/hibernate-envers}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:postgres}
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+      temp:
+        use_jdbc_metadata_defaults: false
+      event:
+        merge:
+          entity_copy_observer: allow
+    open-in-view: false
+    properties:
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _audited
+            audit_strategy: org.hibernate.envers.strategy.DefaultAuditStrategy
+            audit_strategy_validity_store_revend_timestamp: true
+            store_data_at_delete: true
+            track_entities_changed_in_revision: true
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        id:
+          new_generator_mappings: true
+    show-sql: true
+  flyway:
+    baseline-on-migrate: true
+error:
+  handling:
+    http-status-in-json-response: true
+    exception-logging: NO_LOGGING
+    full-stacktrace-http-statuses: 5xx
+    log-levels:
+      5xx: ERROR
+    codes:
+      StoreMasterAddressUnique: STORE_MASTER_ADDRESS_UNIQUE
+      StoreDeliveryAddressUnique: STORE_DELIVERY_ADDRESS_UNIQUE
+springdoc:
+  pathsToMatch: /api/**
