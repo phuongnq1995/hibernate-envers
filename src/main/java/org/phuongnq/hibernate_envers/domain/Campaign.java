@@ -39,7 +39,6 @@ public class Campaign {
     @Column
     private String name;
 
-    @NotAudited
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
     private Store store;

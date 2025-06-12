@@ -10,9 +10,11 @@ import org.phuongnq.hibernate_envers.repos.StoreRepository;
 import org.phuongnq.hibernate_envers.util.NotFoundException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
+@Transactional
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;

@@ -24,7 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @Setter
 @Table(name = "languages")
-@Audited(withModifiedFlag = true)
+@Audited
 @EntityListeners(AuditingEntityListener.class)
 public class Language {
 

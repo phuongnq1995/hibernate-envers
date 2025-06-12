@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Getter
 @Setter
 @Table(name = "addresses")
-@Audited(withModifiedFlag = true)
+@Audited
 @EntityListeners(AuditingEntityListener.class)
 public class Address {
 

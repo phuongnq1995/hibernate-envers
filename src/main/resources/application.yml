@@ -1,3 +1,5 @@
+server:
+    port: 8084
 spring:
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/hibernate-envers}
